@@ -32,9 +32,10 @@ jobs:
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
 
-      # - name: Login to Azure ACR
-      #   uses: azure/docker-login@v1
-      #   with:
+      - name: Login to Azure ACR
+        uses: azure/docker-login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       #     login-server: ${{ env.ACR_NAME }}.azurecr.io
       #     username: ${{ secrets.AZURE_CLIENT_ID }}
       #     password: ${{ secrets.AZURE_CLIENT_SECRET }}
@@ -47,6 +48,7 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Login to ACR via az
         run: az acr login --name ${{ env.ACR_NAME }}
 
